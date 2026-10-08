@@ -1,0 +1,30 @@
+# Secrets: never push the real key
+.env
+.env.*
+!.env.example
+
+# Python build artifacts (Python regenerates these automatically)
+__pycache__/
+*.pyc
+
+# Frontend dependencies and build output (recreated by `npm install` / `npm run build`)
+node_modules/
+frontend/dist/
+
+# Temporary files written while saving JSON atomically
+*.tmp
+
+# Archived state from earlier resets (the audit trail keeps the full history)
+data/archive/
+output/archive/
+
+# Local-only files: assistant settings, session notes, the original data download
+.claude/
+CLAUDE.md
+data (3).zip
+
+# OS / editor clutter
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

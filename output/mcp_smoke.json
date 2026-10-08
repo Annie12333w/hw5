@@ -1,0 +1,210 @@
+{
+  "problem": "Problem 4 - Add the MCP server to vibe coder and test each tool",
+  "server": "campus-customs",
+  "config": ".mcp.json",
+  "server_script": "mcp_server/server.py",
+  "database": "data/campus_customs_new.db",
+  "tested_on": "2026-10-06",
+  "shop_date_today": "2026-08-31",
+  "tests": [
+    {
+      "ticket": 103,
+      "prompt": "Use the campus-customs MCP tool check_stock to look up SKU CC-HOOD-NAVY in size M with a requested quantity of 20 for ticket 103. Show me the raw tool output.",
+      "tool": "check_stock",
+      "arguments": {
+        "sku": "CC-HOOD-NAVY",
+        "size": "M",
+        "requested_qty": 20
+      },
+      "output": {
+        "found": true,
+        "sku": "CC-HOOD-NAVY",
+        "size": "M",
+        "rows": [
+          {
+            "sku": "CC-HOOD-NAVY",
+            "name": "Basic Hoodie Big Yale",
+            "size": "M",
+            "qty": 8,
+            "location": "Aisle A"
+          }
+        ],
+        "total_on_hand": 8,
+        "requested_qty": 20,
+        "shortfall": 12,
+        "can_fill_from_stock": false
+      },
+      "db_verification": {
+        "database": "data/campus_customs_new.db",
+        "all_values_match": true,
+        "checked_fields": [
+          {
+            "field": "inventory.qty",
+            "db_value": 8,
+            "tool_value": 8
+          },
+          {
+            "field": "inventory.name",
+            "db_value": "Basic Hoodie Big Yale",
+            "tool_value": "Basic Hoodie Big Yale"
+          },
+          {
+            "field": "inventory.location",
+            "db_value": "Aisle A",
+            "tool_value": "Aisle A"
+          },
+          {
+            "field": "shortfall = 20 - qty",
+            "db_value": 12,
+            "tool_value": 12
+          }
+        ]
+      }
+    },
+    {
+      "ticket": 101,
+      "prompt": "Use the campus-customs MCP tool check_vendor_invoices with invoice_id 501 for ticket 101. Show me the raw tool output, including the vendor's lead time and whether they will ship new product.",
+      "tool": "check_vendor_invoices",
+      "arguments": {
+        "invoice_id": 501
+      },
+      "output": {
+        "found": true,
+        "date_today": "2026-08-31",
+        "vendors": [
+          {
+            "id": 1,
+            "name": "Bulldog Print Co",
+            "specialty": "apparel reprint",
+            "lead_days": 5,
+            "open_invoices": [
+              {
+                "id": 501,
+                "amount": 840.0,
+                "due_date": "2026-08-28",
+                "status": "open",
+                "description": "Rush reprint CC-TEE-WHITE S",
+                "days_overdue": 3,
+                "is_overdue": true
+              }
+            ],
+            "open_balance": 840.0,
+            "will_ship_new_product": false
+          }
+        ]
+      },
+      "db_verification": {
+        "database": "data/campus_customs_new.db",
+        "all_values_match": true,
+        "checked_fields": [
+          {
+            "field": "desk.date_today",
+            "db_value": "2026-08-31",
+            "tool_value": "2026-08-31"
+          },
+          {
+            "field": "vendors.name",
+            "db_value": "Bulldog Print Co",
+            "tool_value": "Bulldog Print Co"
+          },
+          {
+            "field": "vendors.specialty",
+            "db_value": "apparel reprint",
+            "tool_value": "apparel reprint"
+          },
+          {
+            "field": "vendors.lead_days",
+            "db_value": 5,
+            "tool_value": 5
+          },
+          {
+            "field": "invoices.amount",
+            "db_value": 840.0,
+            "tool_value": 840.0
+          },
+          {
+            "field": "invoices.due_date",
+            "db_value": "2026-08-28",
+            "tool_value": "2026-08-28"
+          },
+          {
+            "field": "invoices.status",
+            "db_value": "open",
+            "tool_value": "open"
+          },
+          {
+            "field": "invoices.description",
+            "db_value": "Rush reprint CC-TEE-WHITE S",
+            "tool_value": "Rush reprint CC-TEE-WHITE S"
+          },
+          {
+            "field": "days_overdue",
+            "db_value": 3,
+            "tool_value": 3
+          },
+          {
+            "field": "will_ship (no open invoices)",
+            "db_value": false,
+            "tool_value": false
+          }
+        ]
+      }
+    },
+    {
+      "ticket": 102,
+      "prompt": "Use the campus-customs MCP tool get_lease_status for lease_id 1 for ticket 102. Show me the raw tool output.",
+      "tool": "get_lease_status",
+      "arguments": {
+        "lease_id": 1
+      },
+      "output": {
+        "found": true,
+        "id": 1,
+        "space_name": "Chapel Street shop",
+        "landlord": "Elm City Properties",
+        "monthly_rent": 2400.0,
+        "next_due": "2026-09-02",
+        "notes": null,
+        "date_today": "2026-08-31",
+        "days_until_due": 2,
+        "is_overdue": false
+      },
+      "db_verification": {
+        "database": "data/campus_customs_new.db",
+        "all_values_match": true,
+        "checked_fields": [
+          {
+            "field": "leases.space_name",
+            "db_value": "Chapel Street shop",
+            "tool_value": "Chapel Street shop"
+          },
+          {
+            "field": "leases.landlord",
+            "db_value": "Elm City Properties",
+            "tool_value": "Elm City Properties"
+          },
+          {
+            "field": "leases.monthly_rent",
+            "db_value": 2400.0,
+            "tool_value": 2400.0
+          },
+          {
+            "field": "leases.next_due",
+            "db_value": "2026-09-02",
+            "tool_value": "2026-09-02"
+          },
+          {
+            "field": "leases.notes",
+            "db_value": null,
+            "tool_value": null
+          },
+          {
+            "field": "days_until_due",
+            "db_value": 2,
+            "tool_value": 2
+          }
+        ]
+      }
+    }
+  ]
+}

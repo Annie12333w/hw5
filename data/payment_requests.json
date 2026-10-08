@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "kind": "invoice",
+    "ref_id": 501,
+    "amount": 840.0,
+    "payee": "Bulldog Print Co",
+    "account": "checking",
+    "ticket_id": 101,
+    "reason": "Ticket 101: overdue invoice #501 to Bulldog Print Co, due August 28; approval unblocks the tee restock.",
+    "requested_by": "accounting",
+    "run_id": "run-20261008T180413Z-7577dd",
+    "shop_date": "2026-08-31",
+    "created_at_utc": "2026-10-08T18:04:34+00:00",
+    "status": "paid",
+    "decided_by": "Supervisor #1",
+    "decided_at_utc": "2026-10-08T18:05:56+00:00",
+    "payment_id": 1
+  },
+  {
+    "id": 2,
+    "kind": "rent",
+    "ref_id": 1,
+    "amount": 2400.0,
+    "payee": "Elm City Properties",
+    "account": "checking",
+    "ticket_id": 102,
+    "reason": "Ticket 102: September rent for Chapel Street shop, payable to Elm City Properties, due September 2, 2026.",
+    "requested_by": "accounting",
+    "run_id": "run-20261008T180650Z-76d270",
+    "shop_date": "2026-08-31",
+    "created_at_utc": "2026-10-08T18:07:07+00:00",
+    "status": "paid",
+    "decided_by": "Supervisor #1",
+    "decided_at_utc": "2026-10-08T18:14:29+00:00",
+    "payment_id": 2
+  }
+]

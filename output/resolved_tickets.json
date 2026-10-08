@@ -1,0 +1,256 @@
+{
+  "run": "Problem 9: sequential run of tickets 101 \u2192 102 \u2192 103 after a reset",
+  "reset_at_utc": "2026-10-08T18:04:05.793+00:00",
+  "shop_date": "2026-08-31",
+  "model": "gpt-6-luna",
+  "checking_start": 3400.0,
+  "checking_end": 160.0,
+  "payments": [
+    {
+      "id": 1,
+      "kind": "invoice",
+      "ref_id": 501,
+      "amount": 840.0,
+      "approved_by": "Supervisor #1"
+    },
+    {
+      "id": 2,
+      "kind": "rent",
+      "ref_id": 1,
+      "amount": 2400.0,
+      "approved_by": "Supervisor #1"
+    }
+  ],
+  "agent_spend_usd": 0.022657,
+  "tickets": [
+    {
+      "id": 101,
+      "subject": "Bulldog tee (Tauhid Zaman)",
+      "final_status": "resolved",
+      "short_outcome": "Size S tee out of stock; Bulldog Print Co blocked by overdue invoice #501. Agents queued the $840.00 payment and a customer draft; Supervisor #1 approved it (invoice paid, tee reprint incoming, expected 2026-09-05) and resolved the ticket.",
+      "run_id": "run-20261008T180413Z-7577dd",
+      "delegations": [
+        "Boss -> Inventory",
+        "Boss -> Accounting",
+        "Boss -> Customer Service"
+      ],
+      "agents": {
+        "Boss": {
+          "tools_used": {
+            "get_shop_date": 1,
+            "get_cash_balance": 1,
+            "update_ticket": 2
+          },
+          "report": "Ticket 101 is waiting for human approval. One size S tee is short, and Bulldog Print Co cannot ship while overdue invoice #501 remains open. Payment request #1 and customer update draft #1 are saved; no arrival date is promised."
+        },
+        "Inventory": {
+          "tools_used": {
+            "check_stock": 1,
+            "check_vendor_invoices": 1,
+            "get_shop_date": 1,
+            "update_ticket": 1
+          },
+          "report": "Ticket 101: CC-TEE-WHITE size S has 0 on hand at Aisle B against 1 requested, short 1, with no incoming stock. Bulldog Print Co is the apparel specialty vendor and has a 5-day lead time, but shipment is blocked by open invoice #501 for $840.00, due August 28 and 3 days overdue as of August 31. No arrival date applies unless the blocker is cleared."
+        },
+        "Accounting": {
+          "tools_used": {
+            "get_ticket": 1,
+            "get_cash_balance": 1,
+            "check_vendor_invoices": 1,
+            "list_payments": 1,
+            "list_payment_requests": 1,
+            "request_payment": 1,
+            "update_ticket": 1
+          },
+          "report": "Invoice #501 to Bulldog Print Co is open and 3 days overdue (due August 28); it has not been paid. Queued payment request #1 for $840.00, leaving $2,560.00 after pending requests, which covers the $2,400.00 rent due September 2. The vendor remains blocked pending approval and payment."
+        },
+        "Customer Service": {
+          "tools_used": {
+            "get_ticket": 1,
+            "save_draft": 1,
+            "update_ticket": 1
+          },
+          "report": "Classic Bulldog Tee, size S, has 0 on hand and no incoming stock. Saved customer update draft #1 explaining restock depends on invoice approval/payment and no arrival date is confirmed."
+        },
+        "Facilities": "not called"
+      },
+      "payment_request_ids": [
+        1
+      ],
+      "draft_ids": [
+        1
+      ],
+      "human_approvals": [
+        {
+          "action": "approved payment",
+          "request_id": 1,
+          "payment_id": 1,
+          "approved_by": "Supervisor #1",
+          "at_utc": "2026-10-08T18:05:56.245+00:00",
+          "checking_after": 2560.0,
+          "related_update": {
+            "table": "invoices",
+            "id": 501,
+            "status": "paid",
+            "vendor_will_ship_new_product": true
+          }
+        },
+        {
+          "action": "marked resolved",
+          "by": "Supervisor #1",
+          "at_utc": "2026-10-08T18:05:57.678+00:00"
+        }
+      ],
+      "cash_change": -840.0,
+      "checking_after": 2560.0,
+      "agent_usage": {
+        "llm_calls": 17,
+        "total_tokens": 66630,
+        "cost_usd": 0.007738
+      }
+    },
+    {
+      "id": 102,
+      "subject": "Rent due (Elm City Properties)",
+      "final_status": "resolved",
+      "short_outcome": "Lease #1 rent of $2,400.00 due 2026-09-02 confirmed by Facilities and queued by Accounting; landlord draft saved. Supervisor #1 approved it (next due moved to 2026-10-02) and resolved the ticket.",
+      "run_id": "run-20261008T180650Z-76d270",
+      "delegations": [
+        "Boss -> Facilities",
+        "Facilities -> Accounting"
+      ],
+      "agents": {
+        "Boss": {
+          "tools_used": {
+            "update_ticket": 2,
+            "get_cash_balance": 1,
+            "list_payment_requests": 1
+          },
+          "report": "Lease #1 confirms $2,400.00 rent due September 2, 2026, not overdue. Payment request #2 is pending approval; landlord draft #2 is saved and unsent. Ticket is waiting for human action."
+        },
+        "Facilities": {
+          "tools_used": {
+            "get_ticket": 1,
+            "get_lease_status": 1,
+            "list_payments": 1,
+            "get_cash_balance": 1,
+            "save_draft": 1,
+            "update_ticket": 1
+          },
+          "report": "Lease #1 confirms the Chapel Street shop, landlord Elm City Properties, monthly rent $2,400.00, due September 2, 2026 (2 days; not overdue). Accounting queued payment request #2, pending human approval. Landlord message draft #2 is saved for review and was not sent; it does not claim payment was made."
+        },
+        "Accounting": {
+          "tools_used": {
+            "get_shop_date": 1,
+            "get_cash_balance": 1,
+            "list_payments": 1,
+            "list_payment_requests": 1,
+            "request_payment": 1,
+            "update_ticket": 1
+          },
+          "report": "Queued $2,400.00 rent for Chapel Street shop to Elm City Properties, due September 2, 2026, as payment request #2. It is pending human approval; no money has moved. $160.00 remains available after the request."
+        },
+        "Inventory": "not called",
+        "Customer Service": "not called"
+      },
+      "payment_request_ids": [
+        2
+      ],
+      "draft_ids": [
+        2
+      ],
+      "human_approvals": [
+        {
+          "action": "approved payment",
+          "request_id": 2,
+          "payment_id": 2,
+          "approved_by": "Supervisor #1",
+          "at_utc": "2026-10-08T18:14:29.634+00:00",
+          "checking_after": 160.0,
+          "related_update": {
+            "table": "leases",
+            "id": 1,
+            "previous_next_due": "2026-09-02",
+            "next_due": "2026-10-02"
+          }
+        },
+        {
+          "action": "marked resolved",
+          "by": "Supervisor #1",
+          "at_utc": "2026-10-08T18:14:31.232+00:00"
+        }
+      ],
+      "cash_change": -2400.0,
+      "checking_after": 160.0,
+      "agent_usage": {
+        "llm_calls": 14,
+        "total_tokens": 51744,
+        "cost_usd": 0.005962
+      }
+    },
+    {
+      "id": 103,
+      "subject": "Bulk hoodie discount (Yale AI Club)",
+      "final_status": "blocked",
+      "short_outcome": "8 of 20 hoodies on hand. Boss chose 15% off ($49.30 each, 55.4% margin). PO draft #3 for 12 hoodies is $264.00 but only $160.00 is left ($104.00 short), so no payment was requested. Customer draft saved. The human chose to leave the ticket blocked.",
+      "run_id": "run-20261008T181533Z-5025c7",
+      "delegations": [
+        "Boss -> Inventory",
+        "Boss -> Accounting",
+        "Boss -> Customer Service"
+      ],
+      "agents": {
+        "Boss": {
+          "tools_used": {
+            "update_ticket": 2
+          },
+          "report": "Ticket 103 is blocked on funding for the 12-unit restock shortfall. Chose 15% off at $49.30 each ($27.30 margin per unit, 55.4%); 8 units are in stock. PO draft #3 is $264.00 versus $160.00 available cash, leaving a $104.00 gap. Customer reply draft #4 is unsent and makes no restock-date promise."
+        },
+        "Inventory": {
+          "tools_used": {
+            "check_stock": 1,
+            "check_vendor_invoices": 2,
+            "update_ticket": 1
+          },
+          "report": "Ticket 103: 8 CC-HOOD-NAVY, size M, are on hand in Aisle A against 20 requested, leaving 12 short and no incoming stock. Based on apparel specialty, Bulldog Print Co (vendor #1) is the supplier; it has no open invoices and will ship. Its 5-day lead time gives an earliest arrival of September 5 if an order is approved today. Ticket note added; 8 can be partially filled from stock as an option."
+        },
+        "Accounting": {
+          "tools_used": {
+            "get_cash_balance": 1,
+            "get_ticket": 1,
+            "check_price_margin": 3,
+            "draft_purchase_order": 1,
+            "update_ticket": 1
+          },
+          "report": "Ticket 103: all tested discounts are above cost. Draft #3 for 12 hoodies is $264.00; Bulldog Print Co can ship with no blocking invoice, arriving September 5, but cash available is $160.00, leaving a $104.00 shortfall. No payment was requested."
+        },
+        "Customer Service": {
+          "tools_used": {
+            "get_ticket": 1,
+            "save_draft": 1,
+            "update_ticket": 1
+          },
+          "report": "Saved customer reply draft #4 for Yale AI Club: 8 navy hoodies, size M, available from stock; remaining 12 depend on funding and a purchase order. Includes the approved 15% price of $49.30 each and does not promise a restock date. Ticket note added; draft was not sent."
+        },
+        "Facilities": "not called"
+      },
+      "payment_request_ids": [],
+      "draft_ids": [
+        3,
+        4
+      ],
+      "human_approvals": [
+        {
+          "action": "none: left blocked by the human (no payment request to approve)"
+        }
+      ],
+      "cash_change": 0.0,
+      "checking_after": 160.0,
+      "agent_usage": {
+        "llm_calls": 20,
+        "total_tokens": 76793,
+        "cost_usd": 0.008957
+      }
+    }
+  ]
+}

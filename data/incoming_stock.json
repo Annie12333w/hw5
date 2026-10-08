@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "payment_id": 1,
+    "status": "on_order",
+    "ordered_on": "2026-08-31",
+    "sku": "CC-TEE-WHITE",
+    "size": "S",
+    "name": "Classic Bulldog Tee",
+    "qty": null,
+    "vendor_id": 1,
+    "vendor": "Bulldog Print Co",
+    "lead_days": 5,
+    "expected_arrival": "2026-09-05",
+    "source": "invoice #501 paid (Rush reprint CC-TEE-WHITE S)",
+    "note": "Quantity is not recorded on the invoice."
+  }
+]
