@@ -13,14 +13,14 @@ Stack: React 19 + Vite + TypeScript in `frontend/`. It talks to the FastAPI back
 ## How to run
 
 ```bash
-# Terminal 1: backend (from HW 5/backend)
+# Terminal 1: backend (from hw5/backend)
 python -m uvicorn main:app --reload --port 8000
 
-# Terminal 2: the desk (from HW 5/frontend)
+# Terminal 2: the desk (from hw5/frontend)
 npm install        # first time only
 npm run dev        # opens http://localhost:5173 in your browser
 ```
-`uvicorn main:app --reload --port 8000` also works once `%APPDATA%\Python\Python314\Scripts` is on your PATH.
+`uvicorn main:app --port 8000` works too if `uvicorn` is on your PATH (see the root README.md).
 
 ---
 
